@@ -1,0 +1,23 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'blog/css/blog-detail.css' %}">
+{% endblock %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block header %}
+<img id="BgImg" src="{{Article.image.url}}" alt="">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="display-4 text-dark">{{Article.title}}</h2>
+        <span>{{Article.published}}</span>
+        <br>
+        <p>{{Article.description}}</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block title %}Article list{% endblock %}
+
+{% block content %}
+<header class="text-white w-100">
+    <div class="container">
+        <h1 class="px-4"><i class="fa fa-list-ul"></i> <span> لیست مقالات</span></h1>
+    </div>
+</header>
+<div class="container bg-light">
+    <div class="mt-5 w-100 d-flex justify-content-center main-ws">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="col-2">تصویر</th>
+                    <th class="col-2">نام</th>
+                    <th class="col-4">توضیحات</th>
+                    <th class="col-3">دسته بندی</th>
+                    <th class="col-2">تاریخ انتشار</th>
+                    <th class="col-2">نویسنده</th>
+                    <th class="col-1">وضعیت</th>
+                    <th class="col-1">ویژه</th>
+                </tr>
+            </thead>
+            <tbody class="">
+            {% for article in object_list %}
+                <tr>
+                    <td class="col-2"><img src="{{article.image.url}}" style="width: 80px; height: 80px;"></td>
+                    <td class="col-2">
+                        {% if article.status in 'bd'|make_list or article.author.top_author  == True %}
+                            <a href="{% url 'blog:article-update' article.slug %}">{{article.title}}</a>
+                        {% else %}
+                            {{article.title}}
+                        {% endif %}
+                    </td>
+                    <td class="col-4">{{article.description|truncatewords:10|safe}}</td>
+                    <td class="col-3">{{article.category_to_str}}</td>
+                    <td class="col-2">{{article.published}}</td>
+                    <td class="col-2">{{article.author}}</td>
+                    <td>
+                    {% if article.status == 'p' %}
+                        <span class="badge badge-success">Published</span>
+                        <a target="_blank" class="badge badge-primary" href="">Show</a>
+                    {% elif article.status == 'i' %}
+                        <span class="badge badge-primary">Investigation</span>
+                        {% if article.author.top_author %}
+                        <a target="_blank" class="badge badge-secondary" href="">Preview</a>
+                        {% endif %}
+                    {% else %}
+                        {% if article.status == 'd' %}
+                            <span class="badge badge-danger">Draft</span>
+                        {% else %}
+                            <span class="badge badge-warning">Back</span>
+                        {% endif %}
+                        <a target="_blank" class="badge badge-secondary" href="">Preview</a>
+                    {% endif %}
+                    {% if article.author.top_author %}
+                      <a class="badge text-danger" href="">Delete</a>
+                    {% endif %}
+                    </td>
+                    <td class="col-1">
+                        {% if article.is_special == True %}
+                          <i class="fa fa-check-circle" style="color: green;"></i>
+                        {% else %}
+                          <i class="fa fa-minus-circle" style="color: red;"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div style="display: inline; margin-left: 240px;">
+        {% if article.has_previous %}
+            <a class="btn btn-primary" href="">Previous</a>
+        {% endif %}
+        {% if article.has_next %}
+            <a class="btn btn-primary" href="">Next</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

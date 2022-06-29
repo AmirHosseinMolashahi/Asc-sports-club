@@ -1,0 +1,71 @@
+{% extends 'dashboard/base.html' %}
+{% load crispy_forms_tags %}
+{% load blog_filter %}
+{% load static %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block title %}Article{% endblock %}
+
+{% block content %}
+    <header class="text-white py-2 w-100">
+        <div class="container">
+            <h1 class="px-4"><i class="fa fa-edit"></i> <span> Article create / update</span></h1>
+        </div>
+    </header>
+    <div class="col-md-12">
+        <div class="card card-primary">
+            <div class="card-body" style="margin-left:100px ;">
+                <form method="post" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="row">
+                        <div class="col-6">
+                            {{ form.title|as_crispy_field }}
+                            {{ form.slug|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ form.category|as_crispy_field }}
+                        </div>
+                        <div class="col-12">
+                            {{ form.description|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ form.image|as_crispy_field }}
+                        </div>
+                        <div class="col-6">
+                            {{ form.published|as_crispy_field }}
+                        </div>
+                        {% if request.user|is_author %}
+                            <div class="col-6">
+                                {{ form.author|as_crispy_field }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.status|as_crispy_field }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.is_special|as_crispy_field }}
+                            </div>
+                        {% else %}
+                            <div class="col-6">
+                                <div id="div_id_status" class="form-group">
+                                    <label for="id_status" class=" requiredField">
+                                    Status<span class="asteriskField">*</span>
+                                    </label>
+                                    <div class="">
+                                        <select name="status" class="select form-control" required="" id="id_status">
+                                            <option value="">---------</option>
+                                            <option value="d">Draft</option>
+                                            <option value="i">Send to top manager</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <button class="btn btn-success">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

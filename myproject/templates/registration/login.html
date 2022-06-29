@@ -1,0 +1,49 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'registration/css/login.css' %}">
+{% endblock %}
+
+{% block title %}Login page{% endblock %}
+
+{% block header %}
+		
+{% endblock %}
+
+{% block content %}
+<section style="margin-top: 70px;" class="form">
+    <div class="container">
+        <div class="row no-gutters login-row">
+            <div class="col-lg-5">
+                <img src="/media/registration/login.png" class="img-fluid login-img" alt="">
+            </div>
+            <div class="col-lg-7 px-5 pt-5">
+                <h1 class="font-weight-bold py-3">لوگو</h1>
+                <h4>اطلاعات خود را وارد کنید</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <input type="text" name="username" class="form-control my-3 p-4" placeholder="نام کاربری">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <input type="password" name="password" class="form-control my-3 p-4" placeholder="رمز">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-lg-7">
+                            <button  type="submit" class="btn1 mt-3 mb-5">ورود</button>
+                        </div>
+                    </div>
+                    <a href="">رمز خود را فراموش کرده اید؟</a>
+                    <p>ثبت نام نکرده اید؟ <a href="">ثبت نام </a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

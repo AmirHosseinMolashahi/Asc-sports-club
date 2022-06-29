@@ -1,0 +1,30 @@
+section {
+    text-align: right;
+}
+.login-row {
+    background-color: rgb(245, 245, 245);
+    border-radius: 10px;
+    box-shadow: 12px 12px 22px grey;
+}
+
+.login-img {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.btn1 {
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn1:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}

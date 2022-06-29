@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static '/home/css/style.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+	{% block css %}
+
+	{% endblock %}
+	<title>{% block title %}Home page {% endblock %}</title>
+</head>
+<body>
+	<header>
+		<!-- navbar -->
+		<nav class="navbar navbar-expand-md fixed-top navbar-light bg-light">
+			<div class="container navbar-div">
+				<div class="navbar-brand mb-0 h1">لوگو</div>
+				<button
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbarNav"
+				class="navbar-toggler"
+				aria-controls="navbarNav"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+				>
+				<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a href="{% url 'home:home-page' %}" class="nav-link">خانه</a></li>
+						<!-- <li class="nav-item"><a class="nav-link">Honor</a></li> -->
+						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+						data-toggle="dropdown"
+						aria-expanded="false">
+						اعضا</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="text-align: right;">
+								<li><a href="{% url 'members:coaches-list' %}" class="dropdown-item">مربیان</a></li>
+								<li><a href="{% url 'members:top-athlete-list' %}" class="dropdown-item">ورزشکاران برتر</a></li>
+							</ul>
+						</li>
+						<li class="nav-item"><a href="{% url 'blog:blog-page' %}" class="nav-link">وبلاگ</a></li>
+						<li class="nav-item"><a href="{% url 'home:about-us' %}" class="nav-link">درباره ما</a></li>
+						<li class="nav-item">
+							{% if request.user.is_authenticated %}
+							<a href="{% url 'dashboard:dashboard-page' %}" class="nav-link">داشبورد <i class="fa fa-home mr-1"></i></a>
+							{% else %}
+							<a href="{% url 'dashboard:login' %}" class="nav-link">ورود <i class="fa fa-sign-in mr-1"></i></a>
+							{% endif %}
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- carousel -->
+		{% block header %}
+		
+		{% endblock %}
+	</header>
+
+
+	{% block content %}
+
+	{% endblock %}
+
+	<footer class="footer bg-dark mt-2">
+		<div class="container">
+		  	<div class="row" style="text-align: right;">
+				<div class="col-sm-4 mt-3">
+					<div class="footer-widget">
+					  <h3 class="text-danger">ارتباط با ما</h3>
+					  <div class="footer-widget-content">
+						<div class="contact-us">
+							<i class="fa fa-instagram text-danger mt-3"></i>
+							<a href="https://www.instagram.com/ashkan_sports_club" target="_blank" class="contact-link text-light mr-3"> ashkan_sports_club</a>
+						</div>
+						<div class="contact-us">
+							<i class="fa fa-whatsapp text-danger mt-3"></i>
+							<a class="contact-link red text-light mr-3"> 09011713453 </a>
+						</div>
+						<div class="contact-us">
+							<i class="fa fa-home text-danger mt-3"></i>
+							<a class="contact-link text-light mr-3">گرگان / خیابان سرخواجه / سرخواجه 9 / انتهای کوچه </a>
+						</div>
+					  </div>
+					</div>
+				</div>
+				<div class="col-sm-4 mt-3">
+					  <div class="footer-widget">
+						  <h3 class="text-danger">آخرین اخبار</h3>
+						  <div class="footer-widget-content">
+							  <div class="media">
+								  <div class="media-body">
+									  <p><a href="#" class="text-light">تریکینگ چیست؟</a></p>
+									  <span class="text-light">۵ شهریور ۱۴۰۰</span>
+								  </div>
+							  </div>
+							  <div class="media">
+								  <div class="media-body">
+								  <p><a href="#" class="text-light">استایل های مختلف ووشو در مسابقات </a></p>
+								  <span class="text-light">۱۰ مهر ۱۴۰ </span>
+								  </div>
+							  </div>
+						  </div>
+					  </div>
+				</div>
+				<div class="col-sm-4 mt-3">
+				  	<div class="footer-widget">
+					<h3 class="text-danger">ساعت های باز بودن باشگاه</h3>
+						<div class="footer-widget-content">
+							<div class="open-time ">
+								<ul class="opening-time">
+									<li class="text-danger"><span><i class="fa fa-times"></i></span><p class="clock-time text-light"><strong>جمعه ها :</strong> تعطیل</p>
+									</li>
+									<li class="text-danger"><span><i class="fa fa-times"></i></span><p class="text-light"><strong>تعطیلات رسمی :</strong> تعطیل</p></li>
+									<li class="text-danger"><span><i class="fa fa-check"></i></span><p class="text-light"><strong>روزهای زوج :</strong> از ۹ صبح تا دوازده شب</p></li>
+									<li class="text-danger"><span><i class="fa fa-check"></i></span><p class="text-light"><strong>روز های فرد :</strong> از ساعت ۲ بعد از ظهر تا ۱۲ شب</p></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-5">
+				<div class="col-md-12">
+					<p class="text-light text-center"><span class="text-danger">Created by:</span> Amir Hossein Mollashahi</p>
+				</div>
+			</div>	
+		</div>
+	</footer>
+
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script> 
+</body>
+</html>
